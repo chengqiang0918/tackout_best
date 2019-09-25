@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.tackout.mapper.RoleMapper">
+    <select id="findThisUrRole" resultType="com.sl.tackout.pojo.RoleTable">
+        SELECT r.* FROM role_table r,user_role_table ur,user_table u
+        WHERE r.roleId=ur.rid
+        AND ur.uid=u.userId
+        AND u.userId=(SELECT userId from user_table WHERE userName = #{userName})
+    </select>
+    <insert id="addMemberRole" parameterType="string">
+        INSERT INTO
+        user_role_table
+        VALUES
+        ((SELECT userId FROM user_table WHERE userName=#{userName}),3 )
+    </insert>
+</mapper>

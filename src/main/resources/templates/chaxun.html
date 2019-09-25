@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .meishi{
+            width: 310px;
+            height: 300px;
+            margin-top: 10px;
+            margin-left: 20px;
+            border: 1px solid;
+            float: left;
+        }
+        .meishiimgdiv{
+            width: 310px;
+            height: 230px;
+        }
+    </style>
+</head>
+<body>
+    <div class="meishi" th:each="m:${list}">
+        <tr >
+            <img class="meishiimgdiv" th:src="${m.gimg}" />
+        </tr>
+        <tr th:size="32px">
+            <td th:text="${m.gname}"></td>
+            <td th:text="${m.gprice}"></td>
+            <td><a th:href="@{/Dingdan(gid=${m.gid})}">点餐</a></td>
+        </tr>
+    </div>
+</div>
+</body>
+</html>

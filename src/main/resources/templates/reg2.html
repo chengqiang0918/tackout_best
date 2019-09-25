@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand" href="index.html" style="font-size:32px;">啃得鸡霾当烙得客势外卖专家</a></div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <form class="form-signin" role="form" action="register" method="get">
+        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户注册</h2>
+        <div class="form-group has-success has-feedback">
+            <input type="text" class="form-control" name="userName" placeholder="请输入登录账号" autofocus>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <input type="password" class="form-control" name="userPwd" placeholder="请输入密码" style="margin-top:10px;">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <input type="password" class="form-control" name="userPwd2" placeholder="请再次输入密码" style="margin-top:10px;">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <input type="password" class="form-control" name="userPhone" placeholder="请输入手机号码" style="margin-top:10px;">
+        </div>
+        <div class="form-group has-success has-feedback">
+            <input type="text" class="form-control" name="userYzm" placeholder="请输入验证码">
+            <img src="/getImg" id="yzm"><a href="javaScript:changeCode()">换一个</a>
+        </div>
+        <!--<div class="form-group has-success has-feedback">-->
+            <!--<select class="form-control" name="userType">-->
+                <!--<option value="会员">会员</option>-->
+                <!--<option value="管理">管理</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <div class="checkbox">
+            <label>
+                忘记密码
+            </label>
+            <label style="float:right">
+                <a href="login">我有账号</a>
+            </label>
+        </div>
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="注册">
+        <span th:text="${error}" style="color: red"/>
+    </form>
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function changeCode() {
+        var nTime = new Date().getTime();
+        $("#yzm").attr("src","/getImg?timestamp="+nTime);
+    }
+</script>
+</body>
+</html>

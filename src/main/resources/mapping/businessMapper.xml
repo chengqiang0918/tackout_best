@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.tackout.mapper.BusinessMapper">
+    <resultMap id="btMapper" type="com.sl.tackout.pojo.BusinessTable">
+        <id property="businessId" column="businessId"/>
+        <result property="businessName" column="businessName"/>
+        <result property="businessPwd" column="businessPwd"/>
+        <result property="businessAddress" column="businessAddress"/>
+        <result property="businessPhone" column="businessPhone"/>
+        <result property="businessState" column="businessState"/>
+        <result property="businessInfo" column="businessInfo"/>
+        <result property="businessImg" column="businessImg"/>
+        <result property="shopName" column="shopName"/>
+    </resultMap>
+    <sql id="btSql">
+        businessId,
+        businessName,
+        businessPwd,
+        businessAddress,
+        businessPhone,
+        businessState,
+        businessInfo,
+        businessImg,
+        shopName
+    </sql>
+    <select id="findBusinessByLoginName" resultType="com.sl.tackout.pojo.BusinessTable" parameterType="string">
+        SELECT
+        <include refid="btSql"/>
+        FROM
+        business_table
+        WHERE
+        businessName=#{businessName}
+    </select>
+    <select id="findMaxBtId" resultType="int">
+        select
+        MAX(businessId)
+        from
+        business_table
+    </select>
+    <insert id="addBt">
+        INSERT INTO
+        business_table
+        /*(businessId,businessName,businessPwd,businessPhone,businessState)*/
+        VALUES
+        (#{businessId},#{businessName},#{businessPwd},#{businessAddress},#{businessPhone},#{businessState},#{businessInfo},#{businessImg})
+    </insert>
+    <select id="findBtBynp" resultType="com.sl.tackout.pojo.BusinessTable" parameterType="string">
+        SELECT
+        <include refid="btSql"/>
+        FROM
+        business_table
+        WHERE
+        businessName=#{btName}
+        AND
+        businessPwd=#{btPwd}
+    </select>
+
+</mapper>

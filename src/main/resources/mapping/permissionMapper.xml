@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.tackout.mapper.PermissionMapper">
+    <resultMap id="perMap" type="com.sl.tackout.pojo.PermissionTable">
+        <id property="perId" column="perId"/>
+        <result property="perName" column="perName"/>
+        <result property="pmenuUrl" column="pmenu_url"/>
+    </resultMap>
+    <sql id="perSql">
+        perId,
+        perName,
+        pmenu_url
+    </sql>
+    <select id="findAllPermissionByUna" resultMap="perMap" parameterType="string">
+        SELECT p.<include refid="perSql"/>
+        FROM
+        user_table u,
+        user_role_table ur,
+        role_table r,
+        role_permission_table rp,
+        permission_table p
+        WHERE
+        u.userId=ur.uid
+        AND
+        ur.rid=r.roleId
+        AND
+        r.roleId=rp.rid
+        AND
+        rp.pid=p.perId
+        AND
+        u.userName=#{userName}
+
+    </select>
+</mapper>

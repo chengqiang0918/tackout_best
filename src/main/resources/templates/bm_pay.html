@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>购买会员</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+        body{
+            text-align:center
+        }
+        img{
+            width: 187px;
+            height: 320px;
+        }
+        span{
+            font-size: 20px;
+        }
+        input{
+            width: 20px;
+            height: 20px;
+        }
+        #div1{
+            margin:0 auto
+        }
+        button{
+            height: 40px;
+            width: 150px;
+            background-color: #eea236;
+            font-size: 15px
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: sandybrown ; height: 50px">
+            <div class="container">
+                <div class="navbar-header">
+                    <div><a class="navbar-brand" href="/findAll" style="font-size:32px;">啃得鸡霾当烙得客势外卖专家</a></div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="padding-top: 15px">欢迎你：<span th:text="${session.userName}"></span></li>
+                        <li><a href="user_center">个人中心</a></li>
+                        <li><a href="loginOut">注销</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div>
+    <h2>购买会员</h2>
+    <p>
+    <h3>尊敬的：<span th:text="${session.userName}"></span>,</h3>
+    成为会员每天都可领取优惠券，让您的购物更优惠
+
+    </p>
+    <div id="div1">
+
+        <label>
+            <span>一月：</span>
+            <br>
+            <img src="img/oney.png"/>
+            <input type="radio" name="coupon" checked="checked"/>
+        </label>
+        <label>
+            <span>一季：</span>
+            <br>
+            <img src="img/onej.png"/>
+            <input type="radio" name="coupon"/>
+        </label>
+        <label>
+            <span>一年：</span>
+            <br>
+            <img src="img/onen.png"/>
+            <input type="radio" name="coupon"/>
+        </label>
+        <br>
+        <br>
+        <div class="bt1">
+            <a href="determine_purchase"><button>确定购买</button></a>
+        </div>
+        <span th:text="${error}" color="red"></span>
+
+
+    </div>
+
+
+
+</div>
+
+
+</body>
+</html>

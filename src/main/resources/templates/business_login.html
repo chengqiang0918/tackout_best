@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+        .imgdiv{
+            float: left;
+            width: 50%;
+            height: auto;
+        }
+        .formdiv{
+            float: left;
+            width: 48%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: dodgerblue ; height: 50px">
+    <div class="container">
+        <div class="navbar-header" style="">
+            <div><a class="navbar-brand" href="/" style="font-size:32px;">去首页</a></div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">商+平台</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top: 30px">
+    <div class="imgdiv" >
+        <img src="img/btlogin3.jpg" height="411px;" width="570px;"/>
+    </div>
+    <div class="formdiv" >
+        <form class="form-signin" role="form" action="business_login" method="post">
+            <h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 商家登录</h2>
+
+            <div class="form-group has-success has-feedback">
+                <input type="text" class="form-control" name="btName" id="inputSuccess41" placeholder="请输入登录账号" autofocus>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-success has-feedback">
+                <input type="password" class="form-control" name="btPwd" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-success has-feedback">
+                <input type="text" class="form-control" name="btImgCode" placeholder="请输入验证码" autofocus>
+                <img src="/getImg" id="yzm"><a href="javaScript:changeCode()">换一张</a>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> 记住我
+                </label>
+                <br>
+                <label>
+                    忘记密码
+                </label>
+                <label style="float:right">
+                    <a href="toBt_reg">还没有账号？</a>
+                </label>
+            </div>
+            <input type="submit" style="background-color: dodgerblue" class="btn btn-lg btn-success btn-block" value="登录"/>
+            <span th:text="${error}" style="color: red"/>
+            <!--<a class="btn btn-lg btn-success btn-block" onclick="dologin()" > 登录</a>-->
+        </form>
+    </div>
+
+
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function changeCode() {
+        var nTime = new Date().getTime();
+        $("#yzm").attr("src","/getImg?timestamp="+nTime)
+    }
+
+</script>
+</body>
+</html>

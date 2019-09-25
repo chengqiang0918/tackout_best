@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>用户首页显示</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/carousel.css">
+    <style type="text/css">
+
+        #bigdiv{
+            height: 1600px;
+            margin: auto;
+
+        }
+        #logo{
+            height: 60px;
+            margin-top: 15px;
+            margin: auto;
+            background:#245580;
+         }
+        #sousuo{
+            width: 600px;
+            height: 25px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .lbimg{
+            width: 1200px;
+            height: 350px;
+        }
+        #lbdiv {
+            width: 1200px;
+            height: 350px;
+            margin:auto;
+            margin-top: 25px;
+
+        }
+        #if1{
+            width: 1200px;
+            height: 1000px;
+            margin: auto;
+            margin-top: 30px;
+            border: 1px solid;
+        }
+
+        #fenlei{
+            height: 40px;
+            width: 1200px;
+            margin-top: 36px;
+            margin: auto;
+            margin-top: 40px;
+        }
+        .meishi{
+            width: 280px;
+            height: 320px;
+            margin-top: 10px;
+            margin-left: 15px;
+            border: 1px solid;
+            float: left;
+        }
+        .meishiimgdiv{
+            width: 280px;
+            height: 230px;
+        }
+    </style>
+</head>
+<body style="background-color: #dfffd0">
+<div id="bigdiv">
+     <div id="logo">
+         <div class="container">
+             <div class="navbar-header" >
+               <a class="navbar-brand" style="font-size:32px;">Hi 欢迎光临千峰美食</a>
+                       <form class="form-inline" role="form" style="float:left;" action="loadChaXun" method="post">
+                           <div class="form-group has-feedback">
+                               <div class="input-group">
+                                   <input class="form-control has-success" type="text" name="name" placeholder="请输入查询条件">
+                               </div>
+                           </div>
+                           <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                       </form>
+                   <a class="navbar-brand" style="font-size:32px;" th:href="@{/user_center}">个人中心</a>
+                 <a class="navbar-brand" style="font-size:32px;" th:href="@{/member_coupon}">优惠券</a>
+                 <!--<a class="navbar-brand" style="font-size:32px;" th:href="@{/bm_pay}">成为会员</a>-->
+                 <a class="navbar-brand" style="font-size:32px;" th:href="@{loginOut}">退出登录</a>
+             </div>
+         </div>
+     </div>
+
+<div id="lbdiv">
+    <img id="img1" onmouseover="stoplb()" onmouseout="startlb()" class="lbimg" src="lbimg/lb1.jpg"/>
+</div >
+   <!-- <div id="fenlei">
+        <button onclick="suiji()">甜点</button>
+        <button onclick="zaocan()">早餐</button>
+        <button onclick="mifan()">米饭</button>
+        <button onclick="miantiao()">面食</button>
+        <button onclick="yinliao()">饮料</button>
+        <iframe id="if1" th:src="@{/Suiji}"></iframe>
+    </div>-->
+    <div id="if1">
+        <div class="meishi" th:each="m:${goodsList}">
+            <table>
+                <tr >
+                    <img class="meishiimgdiv" th:src="${m.gimg}" />
+                </tr>
+                <tr >
+                    <td th:text="${m.gname}"></td>
+                    <td th:text="${m.gprice}"></td>
+                    <td><a th:href="@{/Dingdan(gid=${m.gid})}">点餐</a></td>
+                </tr>
+               <!-- <tr>
+                    <td>  <input type="button" id="jian" value="-"></td>
+                    <td>  <input type="text" id="shoppingCount" name="shoppingCount" value="1" ></td>
+                    <td>  <input type="button" id="jia" value="+" ></td>
+                </tr>-->
+            </table>
+        </div>
+        <div>
+            <!-- <tr >
+                <td align="center" colspan="2" >
+                    <ul class="pagination">
+                        <a th:href="@{/findAll(page=1)}">首页</a>
+                        <a th:href="@{/findAll(page=${currentPage+1})}">上一页</a>
+                    <a th:href="@{/findAll(page=${currentPage-1})}">下一页</a>
+                    <a th:href="@{/findAll(page=${maxPage})}">末页</a>
+                    </ul>
+                    </td>
+                    </tr>-->
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var intervaling=null;
+    window.onload=function(){
+        intervaling=setInterval(function () {
+            showing();
+        },1500 );
+    }
+    var imgs=[
+        "lbimg/lb1.jpg",
+        "lbimg/lb2.jpg",
+        "lbimg/lb3.jpg",
+        "lbimg/lb4.jpg",
+        "lbimg/lb5.jpg"
+    ];
+
+    var count=0;
+    function showing() {
+        count=count%4;
+        var img1=document.getElementById("img1");
+        img1.setAttribute("src",imgs[count]);
+        count++;
+    }
+
+    function startlb() {
+        intervaling=setInterval(function () {
+            showing();
+        },1500 );
+    }
+    function stoplb() {
+        clearInterval(intervaling);
+    }
+
+    var if1=document.getElementById("if1");
+    function zaocan() {
+        if1.setAttribute("src","/Zaocan");
+    }
+    function mifan() {
+        if1.setAttribute("src","/Rice");
+    }
+    function yinliao() {
+        if1.setAttribute("src","/Yinliao");
+    }
+    function miantiao() {
+        if1.setAttribute("src","/Miantiao");
+    }
+    function suiji() {
+        if1.setAttribute("src","/Suiji");
+    }
+    var jian=document.getElementById("jian");
+    var jia=document.getElementById("jia");
+    var shoppingCount=document.getElementById("shoppingCount");
+
+    jia.onclick=function(){
+        shoppingCount.value=parseInt(shoppingCount.value)+1;
+    }
+    jian.onclick=function() {
+        if(shoppingCount.value<=1){
+            shoppingCount.value=1;
+        }else {
+            shoppingCount.value=parseInt(shoppingCount.value)-1;
+        }
+    }
+</script>
+</html>

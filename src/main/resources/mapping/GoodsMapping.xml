@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sl.tackout.mapper.GoodsMapper" >
+    <select id="findAll" resultType="com.sl.tackout.pojo.Goods" >
+    select * from goods_table
+  </select>
+    <select id="findcount" resultType="int">
+        select count(gid) from goods_table ;
+    </select>
+    <select id="xiangqin" parameterType="int" resultType="com.sl.tackout.pojo.Goods">
+        SELECT * FROM goods_table WHERE gid=#{gid};
+    </select>
+   <select id="chaxun" parameterType="String" resultType="com.sl.tackout.pojo.Goods">
+       select * from goods_table
+       where gname like "%"#{name}"%"
+   </select>
+</mapper>

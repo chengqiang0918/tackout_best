@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.tackout.mapper.OrderMapper">
+    <resultMap id="orderMap" type="com.sl.tackout.pojo.OrderTable">
+        <id property="oid" column="oid"/>
+        <result property="oname" column="oname"/>
+        <result property="ofreight" column="ofreight"/>
+        <result property="olunchboxPrice" column="olunchbox_price"/>
+        <result property="ototalPrice" column="ototal_price"/>
+        <result property="ototalshare" column="ototalshare"/>
+        <result property="oremarks" column="oremarks"/>
+        <result property="ocreatTime" column="ocreatTime"/>
+        <result property="ostate" column="ostate"/>
+    </resultMap>
+    <sql id="orderSql">
+        oid,
+        oname,
+        ofreight,
+        olunchbox_price,
+        ototal_price,
+        ototalshare,
+        oremarks,
+        ocreatTime,
+        ostate
+    </sql>
+    <select id="findUserOrder" resultMap="orderMap" parameterType="string">
+        SELECT
+        <include refid="orderSql"/>
+        FROM
+        order_table
+        WHERE
+        oid=(
+        SELECT oid FROM order_user_table WHERE uid=(
+          SELECT userId FROM user_table WHERE userName=#{userName}
+        )
+        )
+    </select>
+</mapper>
